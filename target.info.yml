@@ -1,0 +1,9 @@
+name: Target
+description: 'Provides content customization through target audience definitions.'
+type: module
+package: Other
+version: VERSION
+core: 8.x
+dependencies:
+  - options
+configure: target.collection

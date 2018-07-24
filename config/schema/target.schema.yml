@@ -1,0 +1,53 @@
+# Schema for the configuration files of the Target module.
+
+target.target.*:
+  type: config_entity
+  label: 'Target'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    description:
+      type: text
+      label: 'Description'
+    weight:
+      type: integer
+      label: 'Weight'
+
+target.criteria.*:
+  type: config_entity
+  label: 'Target criteria'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    target:
+      type: text
+      label: 'Target'
+    plugin:
+      type: text
+      label: 'Plugin'
+    group:
+      type: string
+      label: 'Group'
+    logic:
+      type: text
+      label: 'Logic'
+    operator:
+      type: text
+      label: 'Operator'
+    values:
+      type: sequence
+      sequence:
+        type: string
+        label: 'Value'
+      label: 'Values'
+    weight:
+      type: integer
+      label: 'Weight'

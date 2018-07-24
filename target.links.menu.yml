@@ -1,0 +1,6 @@
+target.collection:
+  title: Targets
+  route_name: target.collection
+  parent: system.admin_structure
+  description: 'Manage the targets used on the site.'
+  weight: 0

@@ -1,0 +1,76 @@
+target.collection:
+  path: '/admin/config/target'
+  defaults:
+    _entity_list: 'target'
+    _title: 'Targets'
+    _title_context: 'With modules'
+  requirements:
+    _permission: 'administer targets'
+
+entity.target.add:
+  path: '/admin/config/target/add'
+  defaults:
+    _entity_form: target.edit
+    _title: 'Add target'
+  options:
+    _admin_route: TRUE
+  requirements:
+    _entity_create_access: target
+
+entity.target.edit_form:
+  path: '/admin/config/target/edit/{target}'
+  defaults:
+    _entity_form: target.edit
+    _title: 'Edit target record'
+  options:
+    _admin_route: TRUE
+  requirements:
+    _entity_access: target.update
+
+entity.target.delete_form:
+  path: '/admin/config/target/delete/{target}'
+  defaults:
+    _entity_form: target.delete
+    _title: 'Delete'
+  options:
+    _admin_route: TRUE
+  requirements:
+    _entity_access: target.delete
+
+target.criteria_collection:
+  path: '/admin/config/target/criteria/{target}'
+  defaults:
+    _controller: '\Drupal\target\Controller\TargetCriteriaController::listing'
+    _title_callback: '\Drupal\target\Controller\TargetCriteriaController::title'
+  requirements:
+    _permission: 'administer targets'
+
+entity.target_criteria.add:
+  path: '/admin/config/target/criteria/{target}/add'
+  defaults:
+    _controller: '\Drupal\target\Controller\TargetCriteriaController::addCriteria'
+    _title: 'Add criteria'
+  options:
+    _admin_route: TRUE
+  requirements:
+    _entity_create_access: target_criteria
+
+entity.target_criteria.edit_form:
+  path: '/admin/config/target/criteria/edit/{target_criteria}'
+  defaults:
+    _entity_form: target_criteria.edit
+    _title: 'Edit criteria'
+  options:
+    _admin_route: TRUE
+  requirements:
+    _entity_access: target_criteria.update
+
+entity.target_criteria.delete_form:
+  path: '/admin/config/target/criteria/delete/{target_criteria}'
+  defaults:
+    _entity_form: target_criteria.delete
+    _title: 'Delete'
+  options:
+    _admin_route: TRUE
+  requirements:
+    _entity_access: target_criteria.delete

@@ -1,0 +1,10 @@
+entity.target_add:
+  route_name: entity.target.add
+  title: 'Add target'
+  appears_on:
+    - target.collection
+entity.target_criteria_add:
+  route_name: entity.target_criteria.add
+  title: 'Add criteria'
+  appears_on:
+    - target.criteria_collection

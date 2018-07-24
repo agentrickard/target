@@ -1,0 +1,4 @@
+administer targets:
+  title: 'Administer all targets'
+  description: 'View, create, edit, and delete targets. Allows all permissions for the module.'
+  restrict access: true

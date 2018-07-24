@@ -1,0 +1,17 @@
+{
+  "name": "drupal/target",
+  "description": "Provides target-based contexts for block visibility.",
+  "type": "drupal-module",
+  "license": "GPL-2.0+",
+  "authors": [
+    {
+      "name": "Ken Rickard",
+      "email": "agentrickard@gmail.com"
+    }
+  ],
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/2850907?categories=All",
+    "irc": "http://irc.freenode.org/drupal-contribute",
+    "source": "http://cgit.drupalcode.org/2850907"
+  }
+}

@@ -1,0 +1,7 @@
+drupal.target:
+  version: VERSION
+  js:
+    js/target.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal

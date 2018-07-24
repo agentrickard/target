@@ -1,0 +1,4 @@
+target.collection:
+  title: Targets
+  route_name: target.collection
+  base_route: target.collection

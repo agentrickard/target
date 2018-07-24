@@ -1,0 +1,7 @@
+services:
+  plugin.manager.target.criteria:
+    class: Drupal\target\TargetCriteriaManager
+    parent: default_plugin_manager
+  plugin.manager.target.condition:
+    class: Drupal\target\TargetConditionManager
+    parent: default_plugin_manager
