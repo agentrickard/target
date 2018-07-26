@@ -62,9 +62,15 @@ class TargetBlockListController extends ControllerBase {
    *   A render array as expected by drupal_render().
    */
   public function listing(TargetInterface $target) {
-    $list = \Drupal::entityTypeManager()->getListBuilder('target_criteria');
-    $list->setTarget($target);
-    return $list->render();
+    $blocks = [];
+    $block_storage = \Drupal::entityTypeManager()->getStorage('block');
+
+    $header = [
+      'blocks' => $this->t('Block title'),
+      'targets' => $this->t('Targets'),
+    ];
+    $build = ['#markup' => 'Test'];
+    return $build;
   }
 
   public function title(TargetInterface $target) {
