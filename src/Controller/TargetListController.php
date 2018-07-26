@@ -12,7 +12,7 @@ use Drupal\target\Controller\TargetControllerBase;
 /**
  * Returns responses for Target Criteria module routes.
  */
-class TargetCriteriaController extends ControllerBase {
+class TargetListController extends ControllerBase {
 
   /**
    * The entity storage.
@@ -50,27 +50,6 @@ class TargetCriteriaController extends ControllerBase {
       $entity_manager->getStorage('target'),
       $entity_manager
     );
-  }
-
-  /**
-   * Provides the target criteria submission form.
-   *
-   * @param \Drupal\target\TargetInterface $target
-   *   A target entity.
-   *
-   * @return array
-   *   Returns the target criteria submission form.
-   */
-  public function addCriteria(TargetInterface $target) {
-    // The entire purpose of this controller is to add the values from
-    // the parent target entity.
-    $values['target'] = $target->id();
-    $values['group'] = 'AND_1';
-    $values['logic'] = 'AND';
-    // Create the entity and pass to the form.
-    $criteria = \Drupal::entityTypeManager()->getStorage('target_criteria')->create($values);
-
-    return $this->entityFormBuilder()->getForm($criteria);
   }
 
   /**

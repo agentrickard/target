@@ -40,6 +40,11 @@ class TargetListBuilder extends DraggableListBuilder {
       'url' => Url::fromRoute('target.criteria_collection', array('target' => $entity->id())),
       'weight' => 5,
     );
+    $operations['blocks'] = array(
+      'title' => $this->t('Blocks'),
+      'url' => Url::fromRoute('target.block_collection', array('target' => $entity->id())),
+      'weight' => 10,
+    );
     $operations += parent::getOperations($entity);
     return $operations;
   }

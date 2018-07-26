@@ -74,3 +74,11 @@ entity.target_criteria.delete_form:
     _admin_route: TRUE
   requirements:
     _entity_access: target_criteria.delete
+
+target.block_collection:
+  path: '/admin/config/target/blocks/{target}'
+  defaults:
+    _controller: '\Drupal\target\Controller\TargetListController::listing'
+    _title_callback: '\Drupal\target\Controller\TargetListController::title'
+  requirements:
+    _permission: 'administer targets'
