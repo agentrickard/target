@@ -68,8 +68,12 @@ class TargetBlockListController extends ControllerBase {
     $header = [
       'blocks' => $this->t('Block title'),
       'targets' => $this->t('Targets'),
+      'operations' => $this->t('Operations'),
     ];
-    $build = ['#markup' => 'Test'];
+    $build = [
+      '#theme' => 'table',
+      '#header' => $header,
+    ];
     return $build;
   }
 
