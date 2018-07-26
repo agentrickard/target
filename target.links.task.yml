@@ -1,4 +1,15 @@
-target.collection:
-  title: Targets
-  route_name: target.collection
-  base_route: target.collection
+target.edit:
+  title: Target
+  route_name: entity.target.edit_form
+  base_route: entity.target.edit_form
+  weight: 0
+target.block_collection:
+  title: Targeted blocks
+  route_name: target.block_collection
+  base_route: entity.target.edit_form
+  weight: 20
+target.criteria_collection:
+  title: Target criteria
+  route_name: target.criteria_collection
+  base_route: entity.target.edit_form
+  weight: 10

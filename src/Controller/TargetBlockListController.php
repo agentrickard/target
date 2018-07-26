@@ -12,7 +12,7 @@ use Drupal\target\Controller\TargetControllerBase;
 /**
  * Returns responses for Target Criteria module routes.
  */
-class TargetListController extends ControllerBase {
+class TargetBlockListController extends ControllerBase {
 
   /**
    * The entity storage.
