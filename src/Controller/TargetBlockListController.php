@@ -67,7 +67,7 @@ class TargetBlockListController extends ControllerBase {
 
     $header = [
       'blocks' => $this->t('Block title'),
-      'targets' => $this->t('Targets'),
+      'targets' => $this->t('Targeted'),
       'operations' => $this->t('Operations'),
     ];
     $build = [
