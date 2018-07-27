@@ -183,8 +183,8 @@ class Target extends ConditionPluginBase implements ContainerFactoryPluginInterf
 
     // Load the criteria for the target into logical groups.
     foreach ($targets as $target) {
-      $criteria = $this->getConditions($target);
-      $groups = $this->groupConditions($criteria);
+      $criteria = $this->getCriteria($target);
+      $groups = $this->groupCriteria($criteria);
     }
 
     // Query the plugin for active status.
@@ -275,7 +275,7 @@ class Target extends ConditionPluginBase implements ContainerFactoryPluginInterf
    * @return array
    *   An array of target criteria. \Drupal\target\TargetCriteriaInterface
    */
-  private function getConditions(TargetInterface $target) {
+  private function getCriteria(TargetInterface $target) {
     $criteria = [];
     $query = $this->criteriaStorage->getQuery()
       ->condition('target', $target->id())
@@ -295,7 +295,7 @@ class Target extends ConditionPluginBase implements ContainerFactoryPluginInterf
    *
    * @return array
    */
-  public function groupConditions($criteria) {
+  public function groupCriteria($criteria) {
     $groups = [];
     foreach ($criteria as $item) {
       $groups[$item->getGroup()][$item->getLogic()][] = $item;
