@@ -186,35 +186,17 @@ class Target extends ConditionPluginBase implements ContainerFactoryPluginInterf
       $criteria = $this->getCriteria($target);
       $groups = $this->groupCriteria($criteria);
     }
-
     // Query the plugin for active status.
     $return = FALSE;
-    $definitions = $this->criteriaManager->getDefinitions();
-    $condition_definitions = $this->conditionManager->getDefinitions();
     foreach ($groups as $group => $logic) {
+      $applies = FALSE;
       foreach ($logic as $operator => $items) {
-        foreach ($items as $criteria) {
-          $id = $criteria->getPlugin();
-          // @TODO: Conversion handler for Condition plugins.
-          if (isset($definitions[$id])) {
-            $handler = $this->criteriaManager->getPlugin($criteria->getPlugin($id));
-            // Add the cache contexts.
-            $this->addCacheContexts($handler->cacheContexts());
-            $applies = $handler->applies($criteria);
-            // Contexts cannot set the cache maxAge, but we can set them through the
-            // CacheableDependencyInterface on the criteria, so collect cache data
-            // from each criteria and apply if needed.
-            $timed_cache = $handler->getMaxAge($criteria);
-            if ($timed_cache > -1) {
-              $this->timedConditions[] = $timed_cache;
-            }
-          }
-          elseif (isset($condition_definitions[$id])) {
-            // Handles conditions.
-            $configuration = $this->conditionManager->getConfiguration($criteria, $this->conditionManager->createInstance($id));
-            $handler = $this->conditionManager->createInstance($id, $configuration);
-            $applies = $handler->evaluate();
-          }
+        foreach ($items as $item) {
+          // Handles conditions.
+          $configuration = $this->conditionManager->getConfiguration($item, $this->conditionManager->createInstance($item->getPlugin()));
+          $handler = $this->conditionManager->createInstance($item->getPlugin());
+          $handler->setConfiguration($configuration);
+          $applies = $handler->evaluate();
           if ($operator == 'AND') {
             $return = $applies;
           }
