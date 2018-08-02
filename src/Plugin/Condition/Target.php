@@ -5,6 +5,7 @@ namespace Drupal\target\Plugin\Condition;
 use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Cache\CacheableDependencyInterface;
 use Drupal\Core\Condition\ConditionPluginBase;
+use Drupal\Component\Plugin\PluginManagerInterface;
 use Drupal\Core\Entity\EntityManagerInterface;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Form\FormStateInterface;
@@ -74,7 +75,7 @@ class Target extends ConditionPluginBase implements ContainerFactoryPluginInterf
    *   The entity manager class.
    * @param \Drupal\target\TargetCriteriaManagerInterface $criteria_manager
    *   The criteria plugin manager.
-   * @param \Drupal\target\TargetConditionManager $condition_manager
+   * @param \Drupal\Component\Plugin\PluginManagerInterface $condition_manager
    *   The condition plugin manager.
    * @param array $configuration
    *   A configuration array containing information about the plugin instance.
@@ -83,7 +84,7 @@ class Target extends ConditionPluginBase implements ContainerFactoryPluginInterf
    * @param array $plugin_definition
    *   The plugin implementation definition.
    */
-  public function __construct(EntityManagerInterface $entity_manager, TargetCriteriaManagerInterface $criteria_manager,  TargetConditionManager $condition_manager, array $configuration, $plugin_id, array $plugin_definition) {
+  public function __construct(EntityManagerInterface $entity_manager, TargetCriteriaManagerInterface $criteria_manager,  PluginManagerInterface $condition_manager, array $configuration, $plugin_id, array $plugin_definition) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->targetStorage = $entity_manager->getStorage('target');
     $this->criteriaStorage = $entity_manager->getStorage('target_criteria');
@@ -101,7 +102,7 @@ class Target extends ConditionPluginBase implements ContainerFactoryPluginInterf
     return new static(
         $container->get('entity.manager'),
         $container->get('plugin.manager.target.criteria'),
-        $container->get('plugin.manager.target.condition'),
+        $container->get('plugin.manager.condition'),
         $configuration,
         $plugin_id,
         $plugin_definition
@@ -193,14 +194,12 @@ class Target extends ConditionPluginBase implements ContainerFactoryPluginInterf
       foreach ($logic as $operator => $items) {
         foreach ($items as $item) {
           // Handles conditions.
-          $configuration = $this->conditionManager->getConfiguration($item, $this->conditionManager->createInstance($item->getPlugin()));
-          $handler = $this->conditionManager->createInstance($item->getPlugin());
-          $handler->setConfiguration($configuration);
-          $applies = $handler->evaluate();
+          $condition = $this->conditionManager->createInstance($item->getPlugin());
+          $applies = $condition->evaluate();
           if ($operator == 'AND') {
             $return = $applies;
           }
-          elseif($operator == 'OR' && !empty($applies)) {
+          elseif ($operator == 'OR' && !empty($applies)) {
             $return = $applies;
           }
         }
