@@ -196,6 +196,7 @@ class Target extends ConditionPluginBase implements ContainerFactoryPluginInterf
           // Handles conditions.
           $condition = $this->conditionManager->createInstance($item->getPlugin());
           $applies = $condition->evaluate();
+          $this->addCacheContexts($condition->getCacheContexts());
           if ($operator == 'AND') {
             $return = $applies;
           }
